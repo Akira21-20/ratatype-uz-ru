@@ -1,0 +1,18 @@
+services:
+  - type: web
+    name: ratatype-uz-ru
+    runtime: node
+    buildCommand: npm install && npm run build
+    startCommand: node server/index.js
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: DATABASE_URL
+        fromDatabase:
+          name: ratatype-db
+          property: connectionString
+
+databases:
+  - name: ratatype-db
+    plan: free
+    databaseName: ratatype
